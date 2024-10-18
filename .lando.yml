@@ -1,0 +1,21 @@
+name: feedback-form
+recipe: lamp
+config:
+  webroot: .
+  php: '8.1'
+  database: mariadb
+  config:
+    php: config/php.ini
+
+services:
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+proxy:
+  mailhog:
+    - mail.feedback-form.lndo.site
